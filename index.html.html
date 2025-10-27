@@ -115,7 +115,7 @@
         alert("User already exists! Try a different username.");
       } else {
         users[user] = pass;
-        alert("✅ Registration successful!");
+        alert("RRegistration successful!");
         registerForm.reset();
         registerForm.classList.add("hidden");
         loginForm.classList.remove("hidden");
@@ -127,9 +127,9 @@
       const user = loginUser.value.trim();
       const pass = loginPass.value.trim();
       if (users[user] && users[user] === pass) {
-        alert("🎉 Login Successful! Welcome " + user + "!");
+        alert(" Login Successful! Welcome " + user + "!");
       } else {
-        alert("❌ Invalid credentials. Please try again.");
+        alert("Invalid credentials. Please try again.");
       }
     };
   </script>

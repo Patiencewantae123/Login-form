@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration & Login Form</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 320px;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #aaa;
+    }
+    h2 {
+      text-align: center;
+      color: teal;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      border: none;
+      background: teal;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #007777;
+    }
+    .switch {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .switch a {
+      color: teal;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <form id="registerForm">
+      <h2>Register</h2>
+      <label for="regUser">Username:</label>
+      <input type="text" id="regUser" required />
+      <label for="regPass">Password:</label>
+      <input type="password" id="regPass" required />
+      <button type="submit">Register</button>
+      <div class="switch">
+        Already have an account? <a id="toLogin">Login</a>
+      </div>
+    </form>
+
+    <form id="loginForm" class="hidden">
+      <h2>Login</h2>
+      <label for="loginUser">Username:</label>
+      <input type="text" id="loginUser" required />
+      <label for="loginPass">Password:</label>
+      <input type="password" id="loginPass" required />
+      <button type="submit">Login</button>
+      <div class="switch">
+        Don’t have an account? <a id="toRegister">Register</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const users = {};
+    const registerForm = document.getElementById("registerForm");
+    const loginForm = document.getElementById("loginForm");
+
+    document.getElementById("toLogin").onclick = () => {
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    };
+    document.getElementById("toRegister").onclick = () => {
+      loginForm.classList.add("hidden");
+      registerForm.classList.remove("hidden");
+    };
+
+    registerForm.onsubmit = (e) => {
+      e.preventDefault();
+      const user = regUser.value.trim();
+      const pass = regPass.value.trim();
+      if (users[user]) {
+        alert("User already exists! Try a different username.");
+      } else {
+        users[user] = pass;
+        alert("✅ Registration successful!");
+        registerForm.reset();
+        registerForm.classList.add("hidden");
+        loginForm.classList.remove("hidden");
+      }
+    };
+
+    loginForm.onsubmit = (e) => {
+      e.preventDefault();
+      const user = loginUser.value.trim();
+      const pass = loginPass.value.trim();
+      if (users[user] && users[user] === pass) {
+        alert("🎉 Login Successful! Welcome " + user + "!");
+      } else {
+        alert("❌ Invalid credentials. Please try again.");
+      }
+    };
+  </script>
+</body>
+</html>
